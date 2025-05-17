@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="all-books">
+    <div class="book-header">
+        <h2>Todos os Livros</h2>
+        
+        <form method="GET" action="{{ url_for('livros') }}" class="search-form">
+            <input type="text" name="q" placeholder="Buscar por título, autor ou ISBN..." 
+                   value="{{ request.args.get('q', '') }}">
+            <button type="submit">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+        </form>
+    </div>
+    
+    {% if livros|length == 0 %}
+        <div class="no-results">
+            <p>Nenhum livro encontrado para "{{ request.args.get('q', '') }}"</p>
+            <a href="{{ url_for('livros') }}" class="btn">Ver todos os livros</a>
+        </div>
+    {% else %}
+        <div class="book-grid">
+            {% for livro in livros %}
+            <div class="book-card" data-available="{{ 'true' if livro.disponivel else 'false' }}">
+                {% if livro.capa %}
+                <div class="book-cover">
+                    <img src="{{ url_for('static', filename='uploads/' + livro.capa) }}" alt="Capa de {{ livro.titulo }}">
+                </div>
+                {% else %}
+                <div class="book-cover no-cover">
+                    <i class="fas fa-book"></i>
+                </div>
+                {% endif %}
+                
+                <div class="book-info">
+                    <h3>{{ livro.titulo }}</h3>
+                    <p class="book-author">{{ livro.autor }}</p>
+                    <p class="book-isbn">ISBN: {{ livro.isbn }}</p>
+                    <p class="status {{ 'available' if livro.disponivel else 'unavailable' }}">
+                        {{ 'Disponível' if livro.disponivel else 'Emprestado' }}
+                    </p>
+                    
+                    {% if livro.pode_emprestar %}
+                    <div class="book-actions">
+                        <a href="{{ url_for('emprestar', livro_id=livro.doc_id) }}" class="btn btn-small">
+                            <i class="fas fa-hand-holding"></i> Emprestar
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+<style>
+    .book-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-grow: 1;
+        max-width: 600px;
+    }
+
+    .search-form input {
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        flex-grow: 1;
+    }
+
+    .search-form button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .search-form button:hover {
+        background-color: #45a049;
+    }
+
+    .book-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .book-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        background: white;
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .book-cover {
+        height: 200px;
+        background-color: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .book-cover img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .book-cover.no-cover {
+        background-color: #e9e9e9;
+        color: #666;
+    }
+
+    .book-info {
+        padding: 15px;
+    }
+
+    .book-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .book-author {
+        color: #555;
+        margin: 5px 0;
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    .book-isbn {
+        color: #666;
+        font-size: 0.8rem;
+        margin: 5px 0;
+    }
+
+    .status {
+        margin: 10px 0 0 0;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .status.available {
+        background-color: #e6f7e6;
+        color: #2e7d32;
+    }
+
+    .status.unavailable {
+        background-color: #ffebee;
+        color: #c62828;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .no-results p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .book-actions {
+        margin-top: 10px;
+    }
+    
+    .book-actions .btn-small {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+        .book-header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .search-form {
+            max-width: 100%;
+        }
+        
+        .book-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+    }
+
+    @media (max-width: 480px) {
+        .book-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .search-form {
+            flex-direction: column;
+        }
+        
+        .search-form input,
+        .search-form button {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}

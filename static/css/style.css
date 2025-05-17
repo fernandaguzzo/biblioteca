@@ -1,0 +1,554 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 20px;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #2980b9;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* Alertas */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Formulários */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #f8f9fa;
+}
+
+/* Status */
+.available {
+    color: green;
+}
+
+.unavailable {
+    color: red;
+}
+
+/* Cards */
+.livros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.livro-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.emprestimo-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.filters {
+    margin: 20px 0;
+}
+
+.filters select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Barra de busca */
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.search-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 250px;
+}
+
+/* Ações do admin */
+.admin-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .admin-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .search-form {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .search-form input {
+        flex-grow: 1;
+    }
+}
+
+/* Melhorias na tabela */
+.admin-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-table th {
+    background-color: #2c3e50;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.admin-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Status */
+.available {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.unavailable {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/* Estilos para o grid de livros */
+.livros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.livro-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.livro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.livro-card.indisponivel {
+    opacity: 0.85;
+    background-color: #f9f9f9;
+}
+
+.livro-capa {
+    height: 200px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.livro-capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sem-capa {
+    color: #666;
+    font-size: 16px;
+}
+
+.livro-info {
+    padding: 15px;
+}
+
+.livro-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.livro-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.livro-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.livro-status.disponivel {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.livro-status.emprestado {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .livros-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .admin-actions {
+        flex-direction: column;
+    }
+    
+    .search-form {
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .search-form input {
+        width: 100%;
+    }
+}
+
+/* Estilos para o grid de livros */
+.livros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.livro-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.livro-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.livro-card.indisponivel {
+    opacity: 0.85;
+    background-color: #f9f9f9;
+}
+
+.livro-capa {
+    height: 200px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.livro-capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sem-capa {
+    color: #666;
+    font-size: 16px;
+}
+
+.livro-info {
+    padding: 15px;
+}
+
+.livro-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.livro-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.livro-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.livro-status.disponivel {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.livro-status.emprestado {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .livros-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .admin-actions {
+        flex-direction: column;
+    }
+    
+    .search-form {
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .search-form input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .livros-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos para empréstimos em cards */
+.emprestimos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.emprestimo-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.emprestimo-header {
+    padding: 15px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.emprestimo-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.status {
+    background: #2196F3;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.emprestimo-body {
+    padding: 15px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 120px;
+    display: inline-block;
+}
+
+.info-value {
+    color: #333;
+    flex-grow: 1;
+}
+
+.badge.atraso {
+    background: #f44336;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: 8px;
+}
+
+.info-value.atrasado {
+    color: #f44336;
+    font-weight: 500;
+}
+
+.emprestimo-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #e0e0e0;
+    text-align: right;
+}
+
+/* Adaptações para mobile */
+@media (max-width: 768px) {
+    .emprestimos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-item {
+        flex-direction: column;
+    }
+    
+    .info-label {
+        margin-bottom: 3px;
+    }
+}

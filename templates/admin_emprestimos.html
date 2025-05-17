@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="admin-section">
+    <h2>Todos os Empréstimos Ativos</h2>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('admin') }}" class="btn">Voltar ao Painel</a>
+        <form method="GET" action="{{ url_for('admin_emprestimos') }}" class="search-form">
+            <input type="text" name="q" placeholder="Buscar empréstimos..." value="{{ request.args.get('q', '') }}">
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+    </div>
+    
+    <div class="emprestimos-grid">
+        {% for emp in emprestimos %}
+        <div class="emprestimo-card">
+            <div class="emprestimo-header">
+                <h3>{{ emp.titulo }}</h3>
+                <span class="status">Em andamento</span>
+            </div>
+            
+            <div class="emprestimo-body">
+                <div class="emprestimo-info">
+                    <div class="info-item">
+                        <span class="info-label">Usuário:</span>
+                        <span class="info-value">{{ emp.nome_usuario }}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">Emprestado em:</span>
+                        <span class="info-value">{{ emp.data_emprestimo }}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">Devolução até:</span>
+                        <span class="info-value {{ 'atrasado' if emp.dias_atraso > 0 else '' }}">
+                            {{ emp.data_devolucao }}
+                            {% if emp.dias_atraso > 0 %}
+                            <span class="badge atraso">Atrasado {{ emp.dias_atraso }} dia(s)</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="emprestimo-actions">
+                    <a href="{{ url_for('devolver', livro_id=emp.livro_id) }}" class="btn btn-small">Registrar Devolução</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

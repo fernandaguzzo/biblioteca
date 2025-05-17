@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="admin-section">
+    <h2>Todos os Livros Cadastrados</h2>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('admin') }}" class="btn">Voltar ao Painel</a>
+        <form method="GET" action="{{ url_for('admin_livros') }}" class="search-form">
+            <input type="text" name="q" placeholder="Buscar livros..." value="{{ request.args.get('q', '') }}">
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+    </div>
+    
+    <div class="livros-grid">
+        {% for livro in livros %}
+        <div class="livro-card {{ 'indisponivel' if not livro.disponivel else '' }}">
+            <div class="livro-capa">
+                {% if livro.capa %}
+                <img src="{{ url_for('static', filename='uploads/' + livro.capa) }}" alt="Capa do livro {{ livro.titulo }}">
+                {% else %}
+                <div class="sem-capa">Sem capa</div>
+                {% endif %}
+            </div>
+            
+            <div class="livro-info">
+                <h3>{{ livro.titulo }}</h3>
+                <p><strong>Autor:</strong> {{ livro.autor }}</p>
+                <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
+                
+                <div class="livro-status {{ 'disponivel' if livro.disponivel else 'emprestado' }}">
+                    {{ 'Disponível' if livro.disponivel else 'Emprestado' }}
+                </div>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

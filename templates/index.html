@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h2>Bem-vindo à Biblioteca Digital</h2>
+    <p>Gerencie e explore nossa coleção de livros</p>
+    <div class="actions">
+        <a href="{{ url_for('user') }}" class="btn">Ver Livros</a>
+        <a href="{{ url_for('admin') }}" class="btn btn-admin">Área Admin</a>
+    </div>
+</section>
+{% endblock %}

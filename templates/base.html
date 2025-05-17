@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Biblioteca Digital</h1>
+        <nav>
+            {% if 'username' in session %}
+                <a href="{{ url_for('livros') }}">Catálogo de Livros</a>
+                <a href="{{url_for('user') }}">Meus Empréstimos</a>
+                <a href="{{ url_for('logout') }}">Sair</a>
+               
+            {% else %}
+                <a href="{{ url_for('index') }}">Login</a>
+                <a href="{{ url_for('cadastro') }}">Cadastro</a>
+            {% endif %}
+        </nav>
+    </header>
+    
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Sistema Biblioteca Digital &copy; 2025</p>
+    </footer>
+</body>
+</html>
