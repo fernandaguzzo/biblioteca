@@ -295,5 +295,33 @@ def livros():
     
     return render_template('livros.html', livros=todos_livros)
 
+@app.route('/deletar-livro/<int:livro_id>', methods=['POST'])
+def deletar_livro(livro_id):
+    if not session.get('is_admin'):
+        return redirect(url_for('login'))
+    
+    # Verificar se o livro está emprestado antes de deletar
+    emprestimo_ativo = emprestimos_db.search(
+        (Query().livro_id == livro_id) & 
+        (Query().devolvido == False)
+    )
+    
+    if emprestimo_ativo:
+        flash('Não é possível excluir um livro que está emprestado', 'error')
+    else:
+        # Remover a capa do livro se existir
+        livro = livros_db.get(doc_id=livro_id)
+        if livro and livro.get('capa'):
+            try:
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], livro['capa']))
+            except FileNotFoundError:
+                pass
+        
+        # Remover o livro do banco de dados
+        livros_db.remove(doc_ids=[livro_id])
+        flash('Livro excluído com sucesso!', 'success')
+    
+    return redirect(url_for('admin_livros'))
+
 if __name__ == '__main__':
     app.run(debug=True)

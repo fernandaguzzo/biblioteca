@@ -538,7 +538,7 @@ table th {
     text-align: right;
 }
 
-/* Adaptações para mobile */
+
 @media (max-width: 768px) {
     .emprestimos-grid {
         grid-template-columns: 1fr;
@@ -551,4 +551,18 @@ table th {
     .info-label {
         margin-bottom: 3px;
     }
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
 }
