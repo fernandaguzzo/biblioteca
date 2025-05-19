@@ -3,6 +3,16 @@
 {% block content %}
 <section class="admin-panel">
     <h2>Painel Administrativo</h2>
+
+     <div class="admin-links">
+        <div class="admin-link-card">
+            <a href="{{ url_for('admin_livros') }}" class="btn">Livros Cadastrados</a>
+        </div>
+        <br>
+        <div class="admin-link-card">
+            <a href="{{ url_for('admin_emprestimos') }}" class="btn">Empréstimos Ativos</a>
+        </div>
+    </div>
     
     <div class="admin-section">
         <h3>Adicionar Novo Livro</h3>
@@ -27,18 +37,6 @@
         </form>
     </div>
     
-    <div class="admin-links">
-        <div class="admin-link-card">
-            <h3>Livros Cadastrados</h3>
-            <p>Visualize e gerencie todos os livros</p>
-            <a href="{{ url_for('admin_livros') }}" class="btn">Acessar</a>
-        </div>
-        
-        <div class="admin-link-card">
-            <h3>Empréstimos Ativos</h3>
-            <p>Controle de empréstimos em andamento</p>
-            <a href="{{ url_for('admin_emprestimos') }}" class="btn">Acessar</a>
-        </div>
-    </div>
+   
 </section>
 {% endblock %}

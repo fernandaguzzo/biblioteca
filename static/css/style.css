@@ -508,12 +508,12 @@ table th {
 .info-label {
     font-weight: 600;
     color: #555;
-    min-width: 120px;
     display: inline-block;
 }
 
 .info-value {
     color: #333;
+    margin-left: 4px;
     flex-grow: 1;
 }
 
